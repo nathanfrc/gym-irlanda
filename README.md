@@ -59,6 +59,9 @@ Route documentation
 | POST | /login |to generate jwt access token |
 
 ## User 
+
+endpoints to manage system users
+
 | Method | Route | description |
 | ------ | ------ | ------ |
 | POST | /user |create a new user |
@@ -76,6 +79,8 @@ pagination is done by queryParam parameters. ex:
 [{base}/{endpoint}/?page=1&itemsPerPage=10 ]
 
 ## Person
+endpoints to manage customers, employees
+
 | Method | Route | description |
 | ------ | ------ | ------ |
 | POST | /person/user | Create user for client with client access permission only |
@@ -86,6 +91,7 @@ pagination is done by queryParam parameters. ex:
 | GET | /persons | search all users |
 
 ## Workouts
+endpoints to manage customer training
 | Method | Route | description |
 | ------ | ------ | ------ |
 | POST | /workout |create a new workouts |
@@ -96,6 +102,8 @@ pagination is done by queryParam parameters. ex:
 | GET | person/workouts/{id} | search all workouts by person |
 
 ## Comments
+endpoints to handle training comments for clients
+
 | Method | Route | description |
 | ------ | ------ | ------ |
 | POST | /workout/comments |create a new comments |
@@ -106,6 +114,7 @@ pagination is done by queryParam parameters. ex:
 | GET | /workouts/{id}/comments | search all comments by workouts  |
 
 ## CheckWorkouts
+endpoints to manage people's workouts, created by their trainers
 | Method | Route | description |
 | ------ | ------ | ------ |
 | POST | /CheckWorkout |create a new comments |
