@@ -82,18 +82,30 @@ abstract class BaseController extends AbstractController
     public function findByAll(Request $request): Response
     {
         try {
+            
             $filterData = $this->requestDataExtractor->getFilterData($request);
-            $orderData = $this->requestDataExtractor->getOrderData($request);
-            $paginationData = $this->requestDataExtractor->getPaginationData($request);
-            $itemsPerPage = $_ENV['ITEMS_PER_PAGE'] ?? 10;
 
+            if(isset($filterData["url"])) {
+                unset($filterData["url"]);
+            }
+            
+            $orderData = $this->requestDataExtractor->getOrderData($request);
+            
+            $paginationData = $this->requestDataExtractor->getPaginationData($request);
+            
+            $itemsPerPage = $request->query->getInt('itemsPerPage', 10);
+
+            if(isset($filterData["itemsPerPage"])) {
+                unset($filterData["itemsPerPage"]);
+            }
+        
             $entityList = $this->repository->findBy(
                 $filterData,
                 $orderData,
                 $itemsPerPage,
                 ($paginationData - 1) * $itemsPerPage
             );
-
+            
             $hypermidiaResponse = new HypermidiaResponse($entityList, true, Response::HTTP_OK, $paginationData, $itemsPerPage);
         } catch (\Throwable $erro) {
             $hypermidiaResponse = HypermidiaResponse::fromError($erro);

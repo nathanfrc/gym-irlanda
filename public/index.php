@@ -1,10 +1,13 @@
 <?php
 
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 use App\Kernel;
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;
 
-require dirname(__DIR__).'/config/bootstrap.php';
+require dirname(__DIR__).'/public_html/config/bootstrap.php';
 
 if ($_SERVER['APP_DEBUG']) {
     umask(0000);
