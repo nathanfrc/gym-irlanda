@@ -7,6 +7,7 @@ use App\Repository\PersonRepository;
 use App\Repository\UserRepository;
 use App\Repository\WorkoutsRepository;
 use App\System\DataDAO;
+use App\Entity\DTO\WorkoutsCommentsDTO;
 
 class CommentsFactory implements EntityFactoryInterface
 {
@@ -151,6 +152,30 @@ class CommentsFactory implements EntityFactoryInterface
         }
         
        return;
+    }
+
+    public function findByWorkoutsComments($id)
+    {
+        $data = new DataDAO();
+    
+        $query = "SELECT c.id AS c_id, c.description AS c_description,
+        c.stars AS c_stars, c.created AS c_created,
+        w.id AS w_id,w.title AS w_title,w.time AS w_time, w.description AS w_description,
+        p.id AS p_id ,p.first_name AS p_first_name, p.last_name AS p_last_name
+        FROM comments AS c
+        JOIN workouts AS w ON w.id = c.workouts_id
+        JOIN person AS p ON p.id = c.person_id
+         WHERE w.id = ?";
+            $values['id'] = $id;
+
+        if(($dataReturn = $data->query_db($query, $values)) === false) {
+            throw new EntityFactoryException("there is no data");
+        }
+
+        $personWorkoutsDTO  = new WorkoutsCommentsDTO($dataReturn);
+
+        return $personWorkoutsDTO->getData();
+
     }
 
 }

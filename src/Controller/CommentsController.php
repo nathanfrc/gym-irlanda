@@ -35,4 +35,9 @@ class CommentsController extends BaseController
     {
         return 'workouts_';
     }
+
+    public function findByWorkoutsComments(int $id)
+    {
+        return $this->responseData( $this->entityFactory->findByWorkoutsComments($id));
+    }
 }

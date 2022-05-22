@@ -121,6 +121,11 @@ workout_comments:
   methods:
     - GET
   controller: App\Controller\CommentsController::findById
+workout_comments_by:
+  path: /workouts/{id}/comments
+  methods:
+    - GET
+  controller: App\Controller\CommentsController::findByWorkoutsComments
 #user
 new_user:
   path: /user
