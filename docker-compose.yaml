@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+    app:
+        build: .
+        networks:
+          - backend
+        volumes:
+          - .:/app
+        working_dir: /app
+        ports:
+          - 8001:8001
+        container_name: gym_php
+networks:
+  backend:
