@@ -36,4 +36,6 @@ RUN apt-get update && \
 RUN apt-get install -y zlib1g-dev libzip-dev unzip
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-CMD ["php", "-S", "0.0.0.0:8001", "-t", "public"]
+#CMD ["php", "-S", "0.0.0.0:8001", "-t", "public"]
+#https://34.203.28.18/
+CMD ["php", "-S", "34.203.28.18:80", "-t", "public"]
