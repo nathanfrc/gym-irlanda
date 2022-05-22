@@ -1,0 +1,32 @@
+security:
+    encoders:
+        App\Entity\User:
+            algorithm: auto
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: username
+    firewalls:
+        main:
+            pattern: ^\/(?!.*(especialidades_html|login)).*$
+            anonymous: ~
+            logout: ~
+            guard:
+                authenticators:
+                    - App\Security\JwtAuthenticator
+    role_hierarchy:
+         ROLE_ADMIN: ROLE_STAFF
+
+    access_control:
+        # matches /admin/users/*
+        - { path: '^/user', roles: ROLE_ADMIN}
+        - { path: '^/person/user', roles: ROLE_STAFF }
+        - { path: '^/workout/comments', roles: ROLE_USER }
+        - { path: '^/workout', roles: ROLE_STAFF }
+
+        # matches /admin/* except for anything matching the above rule
+        #- { path: '^/admin', roles: ROLE_ADMIN }
